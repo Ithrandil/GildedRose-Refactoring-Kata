@@ -1,3 +1,10 @@
+export enum NomObjet {
+  VIEUX_BRIE = "Vieux Brie",
+  PASS_COULISSE_METALLICA = "Pass pour les coulisses d'un concert de Metallica",
+  SULFURAS = "Sulfuras, Main de Ragnaros",
+  BIERE = "Bière",
+}
+
 export class Objet {
   nom: string;
   joursRestantsAvantPeremption: number;
@@ -18,51 +25,51 @@ export class RoseDoree {
   }
 
   miseAJourqualite() {
-    for (let i = 0; i < this.objets.length; i++) {
-      if (this.objets[i].nom != "Vieux brie" && this.objets[i].nom != "Pass pour les coulisses d'un concert de Metallica") {
-        if (this.objets[i].qualite > 0) {
-          if (this.objets[i].nom != "Sulfuras, Main de Ragnaros") {
-            this.objets[i].qualite = this.objets[i].qualite - 1
+    this.objets.forEach(objet => {
+      if (objet.nom != NomObjet.VIEUX_BRIE && objet.nom != NomObjet.PASS_COULISSE_METALLICA) {
+        if (objet.qualite > 0) {
+          if (objet.nom != NomObjet.SULFURAS) {
+            objet.qualite = objet.qualite - 1
           }
         }
       } else {
-        if (this.objets[i].qualite < 50) {
-          this.objets[i].qualite = this.objets[i].qualite + 1
-          if (this.objets[i].nom == "Pass pour les coulisses d'un concert de Metallica") {
-            if (this.objets[i].joursRestantsAvantPeremption < 11) {
-              if (this.objets[i].qualite < 50) {
-                this.objets[i].qualite = this.objets[i].qualite + 1
+        if (objet.qualite < 50) {
+          objet.qualite = objet.qualite + 1
+          if (objet.nom == NomObjet.PASS_COULISSE_METALLICA) {
+            if (objet.joursRestantsAvantPeremption < 11) {
+              if (objet.qualite < 50) {
+                objet.qualite = objet.qualite + 1
               }
             }
-            if (this.objets[i].joursRestantsAvantPeremption < 6) {
-              if (this.objets[i].qualite < 50) {
-                this.objets[i].qualite = this.objets[i].qualite + 1
+            if (objet.joursRestantsAvantPeremption < 6) {
+              if (objet.qualite < 50) {
+                objet.qualite = objet.qualite + 1
               }
             }
           }
         }
       }
-      if (this.objets[i].nom != "Sulfuras, Main de Ragnaros") {
-        this.objets[i].joursRestantsAvantPeremption = this.objets[i].joursRestantsAvantPeremption - 1;
+      if (objet.nom != NomObjet.SULFURAS) {
+        objet.joursRestantsAvantPeremption = objet.joursRestantsAvantPeremption - 1;
       }
-      if (this.objets[i].joursRestantsAvantPeremption < 0) {
-        if (this.objets[i].nom != "Vieux brie") {
-          if (this.objets[i].nom != "Pass pour les coulisses d'un concert de Metallica") {
-            if (this.objets[i].qualite > 0) {
-              if (this.objets[i].nom != "Sulfuras, Main de Ragnaros") {
-                this.objets[i].qualite = this.objets[i].qualite - 1
+      if (objet.joursRestantsAvantPeremption < 0) {
+        if (objet.nom != NomObjet.VIEUX_BRIE) {
+          if (objet.nom != NomObjet.PASS_COULISSE_METALLICA) {
+            if (objet.qualite > 0) {
+              if (objet.nom != NomObjet.SULFURAS) {
+                objet.qualite = objet.qualite - 1
               }
             }
           } else {
-            this.objets[i].qualite = this.objets[i].qualite - this.objets[i].qualite
+            objet.qualite = 0;
           }
         } else {
-          if (this.objets[i].qualite < 50) {
-            this.objets[i].qualite = this.objets[i].qualite + 1
+          if (objet.qualite < 50) {
+            objet.qualite = objet.qualite + 1
           }
         }
       }
-    }
+    });
 
     return this.objets;
   }
