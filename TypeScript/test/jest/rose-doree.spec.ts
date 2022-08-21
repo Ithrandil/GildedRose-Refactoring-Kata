@@ -53,6 +53,12 @@ describe("Rose Doree", () => {
     expect(objets[0].qualite).toBe(80);
   });
 
+  // it("Devrait ne pas avoir de 'date de péremption' pour 'Sulfuras, Main de Ragnaros'", () => {
+  //   const roseDoree = new RoseDoree([new Objet(NomObjet.SULFURAS, 30, 70)]);
+  //   const objets = roseDoree.miseAJourqualite();
+  //   expect(objets[0].joursRestantsAvantPeremption).toBe(undefined);
+  // });
+
   it("Devrait augmenter la 'qualité' de 'Pass pour les coulisses d'un concert de Metallica' chaque jour", () => {
     const roseDoree = new RoseDoree([new Objet(NomObjet.PASS_COULISSE_METALLICA, 30, 20)]);
     const objets = roseDoree.miseAJourqualite();
@@ -76,6 +82,10 @@ describe("Rose Doree", () => {
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(0);
   });
+
+  // it("Devrait ne pas modifier la classe 'Objet' (Open-closed Principle)", () => {
+  //   expect(objets[0]).toBe("");
+  // });
 
   // Test sur les nouvelles fonctionnalités
   it("Devrait diminuer la qualité deux fois plus vite un 'Objet' ayant la 'caractéristique' 'Conjuré'", () => {
