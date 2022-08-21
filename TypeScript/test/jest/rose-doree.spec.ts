@@ -76,3 +76,17 @@ describe("Rose Doree", () => {
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(0);
   });
+
+  // Test sur les nouvelles fonctionnalités
+  it("Devrait diminuer la qualité deux fois plus vite un 'Objet' ayant la 'caractéristique' 'Conjuré'", () => {
+    const roseDoree = new RoseDoree([new Objet(NomObjet.GATEAU_MANA_CONJURE, 10, 20)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].qualite).toBe(18);
+  });
+
+  it("Devrait diminuer la qualité deux fois plus vite un 'Objet' ayant la 'caractéristique' 'Conjuré' même périmé", () => {
+    const roseDoree = new RoseDoree([new Objet(NomObjet.GATEAU_MANA_CONJURE, 0, 20)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].qualite).toBe(16);
+  });
+});

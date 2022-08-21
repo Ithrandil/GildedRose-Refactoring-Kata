@@ -3,4 +3,5 @@ export enum NomObjet {
     PASS_COULISSE_METALLICA = "Pass pour les coulisses d'un concert de Metallica",
     SULFURAS = "Sulfuras, Main de Ragnaros",
     BIERE = "Bière",
+    GATEAU_MANA_CONJURE = "Gateau de Mana Conjure"
 }

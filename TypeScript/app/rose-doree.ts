@@ -1,5 +1,6 @@
 import { NomObjet } from './models/nomObjet';
 import { Objet } from './models/objet';
+import { Sulfura } from './models/sulfura';
 
 export class RoseDoree {
   objets: Array<Objet>;
@@ -9,7 +10,7 @@ export class RoseDoree {
   }
 
   verificationQualiteMax(objet: Objet) {
-    if (objet.qualite > 50) {
+    if (objet.qualite > 50 && !(objet instanceof Sulfura)) {
       objet.qualite = 50;
     }
     return objet;
@@ -30,11 +31,13 @@ export class RoseDoree {
           break;
         case NomObjet.PASS_COULISSE_METALLICA:
           objet = this.qualitePassCoulisseMetallica(objet);
-          objet = this.verificationQualiteMax(objet);
           break;
         case NomObjet.VIEUX_BRIE:
           objet.qualite++;
-          objet = this.verificationQualiteMax(objet);
+          break;
+        case NomObjet.GATEAU_MANA_CONJURE:
+          objet.joursRestantsAvantPeremption--;
+          objet.qualite = objet.joursRestantsAvantPeremption <= 0 ? objet.qualite - 4 : objet.qualite - 2;
           break;
         default:
           objet.joursRestantsAvantPeremption--;
@@ -46,10 +49,10 @@ export class RoseDoree {
           if (objet.qualite < 0) {
             objet.qualite = 0;
           }
-          objet = this.verificationQualiteMax(objet);
 
           break;
       }
+      objet = this.verificationQualiteMax(objet);
     });
 
     return this.objets;
