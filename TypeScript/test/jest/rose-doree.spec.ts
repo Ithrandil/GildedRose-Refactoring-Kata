@@ -1,4 +1,7 @@
-import { NomObjet, Objet, RoseDoree, Sulfura } from '@/rose-doree';
+import { NomObjet } from '@/models/nomObjet';
+import { Objet } from '@/models/objet';
+import { Sulfura } from '@/models/sulfura';
+import { RoseDoree } from '@/rose-doree';
 
 describe("Rose Doree", () => {
   // Tests sur les fonctionnalités existantes

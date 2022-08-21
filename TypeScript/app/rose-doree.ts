@@ -1,28 +1,6 @@
-export enum NomObjet {
-  VIEUX_BRIE = "Vieux Brie",
-  PASS_COULISSE_METALLICA = "Pass pour les coulisses d'un concert de Metallica",
-  SULFURAS = "Sulfuras, Main de Ragnaros",
-  BIERE = "Bière",
-}
+import { NomObjet } from './models/nomObjet';
+import { Objet } from './models/objet';
 
-export class Objet {
-  nom: string;
-  joursRestantsAvantPeremption: number;
-  qualite: number;
-
-  constructor(nom, joursRestantsAvantPeremption, qualite) {
-    this.nom = nom;
-    this.joursRestantsAvantPeremption = joursRestantsAvantPeremption;
-    this.qualite = qualite;
-  }
-}
-
-export class Sulfura extends Objet {
-  constructor(nom, joursRestantsAvantPeremption, qualite) {
-    super(nom, joursRestantsAvantPeremption, qualite);
-    this.qualite = 80;
-  }
-}
 export class RoseDoree {
   objets: Array<Objet>;
 
@@ -30,53 +8,47 @@ export class RoseDoree {
     this.objets = objets;
   }
 
+  verificationQualiteMax(objet: Objet) {
+    if (objet.qualite > 50) {
+      objet.qualite = 50;
+    }
+    return objet;
+  }
+
+  qualitePassCoulisseMetallica(objet: Objet) {
+    objet.qualite++;
+    objet.joursRestantsAvantPeremption <= 10 ? objet.qualite++ : null;
+    objet.joursRestantsAvantPeremption <= 5 ? objet.qualite++ : null;
+    objet.qualite = objet.joursRestantsAvantPeremption <= 0 ? 0 : objet.qualite;
+    return objet;
+  }
+
   miseAJourqualite() {
     this.objets.forEach(objet => {
-      if (objet.nom === NomObjet.SULFURAS) {
-        return;
-      }
-      if (objet.nom != NomObjet.VIEUX_BRIE && objet.nom != NomObjet.PASS_COULISSE_METALLICA) {
-        if (objet.qualite > 0) {
-          if (objet.nom != NomObjet.SULFURAS) {
-            objet.qualite = objet.qualite - 1
-          }
-        }
-      } else {
-        if (objet.qualite < 50) {
-          objet.qualite = objet.qualite + 1
-          if (objet.nom == NomObjet.PASS_COULISSE_METALLICA) {
-            if (objet.joursRestantsAvantPeremption < 11) {
-              if (objet.qualite < 50) {
-                objet.qualite = objet.qualite + 1
-              }
-            }
-            if (objet.joursRestantsAvantPeremption < 6) {
-              if (objet.qualite < 50) {
-                objet.qualite = objet.qualite + 1
-              }
-            }
-          }
-        }
-      }
-      if (objet.nom != NomObjet.SULFURAS) {
-        objet.joursRestantsAvantPeremption = objet.joursRestantsAvantPeremption - 1;
-      }
-      if (objet.joursRestantsAvantPeremption < 0) {
-        if (objet.nom != NomObjet.VIEUX_BRIE) {
-          if (objet.nom != NomObjet.PASS_COULISSE_METALLICA) {
-            if (objet.qualite > 0) {
-              if (objet.nom != NomObjet.SULFURAS) {
-                objet.qualite = objet.qualite - 1
-              }
-            }
+      switch (objet.nom) {
+        case NomObjet.SULFURAS:
+          break;
+        case NomObjet.PASS_COULISSE_METALLICA:
+          objet = this.qualitePassCoulisseMetallica(objet);
+          objet = this.verificationQualiteMax(objet);
+          break;
+        case NomObjet.VIEUX_BRIE:
+          objet.qualite++;
+          objet = this.verificationQualiteMax(objet);
+          break;
+        default:
+          objet.joursRestantsAvantPeremption--;
+          if (objet.joursRestantsAvantPeremption <= 0) {
+            objet.qualite = objet.qualite - 2;
           } else {
+            objet.qualite--;
+          }
+          if (objet.qualite < 0) {
             objet.qualite = 0;
           }
-        } else {
-          if (objet.qualite < 50) {
-            objet.qualite = objet.qualite + 1
-          }
-        }
+          objet = this.verificationQualiteMax(objet);
+
+          break;
       }
     });
 
