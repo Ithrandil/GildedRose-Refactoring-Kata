@@ -1,32 +1,32 @@
-import { Item, GildedRose } from '../app/gilded-rose';
+import { Objet, RoseDoree } from '../app/rose-doree';
 
-const items = [
-  new Item("+5 Dexterity Vest", 10, 20), //
-  new Item("Aged Brie", 2, 0), //
-  new Item("Elixir of the Mongoose", 5, 7), //
-  new Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-  new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-  new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-  new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-  new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-  // this conjured item does not work properly yet
-  new Item("Conjured Mana Cake", 3, 6)];
+const objets = [
+  new Objet("Veste de dexterite +5", 10, 20), //
+  new Objet("Vieux Brie", 2, 0), //
+  new Objet("Elixir de la Mangouste", 5, 7), //
+  new Objet("Sulfuras, Main de Ragnaros", 0, 80), //
+  new Objet("Sulfuras, Main de Ragnaros", -1, 80),
+  new Objet("Pass pour les coulisses d'un concert de Metallica", 15, 20),
+  new Objet("Pass pour les coulisses d'un concert de Metallica", 10, 49),
+  new Objet("Pass pour les coulisses d'un concert de Metallica", 5, 49),
+  // Cet objet Conjure ne fonctionne pas correctement pour le moment
+  new Objet("Gateau de Mana Conjure", 3, 6)];
 
 
-const gildedRose = new GildedRose(items);
+const roseDoree = new RoseDoree(objets);
 
-let days: number = 2;
+let jours: number = 2;
 if (process.argv.length > 2) {
-    days = +process.argv[2];
-  }
+  jours = +process.argv[2];
+}
 
-for (let i = 0; i < days; i++) {
-  console.log("-------- day " + i + " --------");
-  console.log("name, sellIn, quality");
-  items.forEach(element => {
-    console.log(element.name + ' ' + element.sellIn + ' ' + element.quality);
+for (let i = 0; i < jours; i++) {
+  console.log("-------- jour " + i + " --------");
+  console.log("nom, joursRestantsAvantPeremption, qualite");
+  objets.forEach(element => {
+    console.log(element.nom + ' ' + element.joursRestantsAvantPeremption + ' ' + element.qualite);
 
   });
   console.log();
-  gildedRose.updateQuality();
+  roseDoree.miseAJourqualite();
 }
