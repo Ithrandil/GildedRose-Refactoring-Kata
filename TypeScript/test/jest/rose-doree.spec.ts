@@ -49,3 +49,9 @@ describe("Rose Doree", () => {
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(22);
   });
+
+  it("Devrait augmenter la 'qualité' de 'Pass pour les coulisses d'un concert de Metallica' de 3 quand la 'péremption' est de 5 jours ou moins", () => {
+    const roseDoree = new RoseDoree([new Objet("Pass pour les coulisses d'un concert de Metallica", 5, 20)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].qualite).toBe(23);
+  });
