@@ -1,6 +1,10 @@
+import { Conjure } from './models/conjure';
 import { NomObjet } from './models/nomObjet';
 import { Objet } from './models/objet';
+import { ObjetRoseDoree } from './models/objetRoseDoree';
+import { PassCoulisseMetallica } from './models/passCoulisseMetallica';
 import { Sulfura } from './models/sulfura';
+import { VieuxBrie } from './models/vieuxBrie';
 
 export class RoseDoree {
   objets: Array<Objet>;
@@ -16,41 +20,25 @@ export class RoseDoree {
     return objet;
   }
 
-  qualitePassCoulisseMetallica(objet: Objet) {
-    objet.qualite++;
-    objet.joursRestantsAvantPeremption <= 10 ? objet.qualite++ : null;
-    objet.joursRestantsAvantPeremption <= 5 ? objet.qualite++ : null;
-    objet.qualite = objet.joursRestantsAvantPeremption <= 0 ? 0 : objet.qualite;
-    return objet;
-  }
-
   miseAJourqualite() {
     this.objets.forEach(objet => {
-      switch (objet.nom) {
-        case NomObjet.SULFURAS:
+      switch (objet.constructor) {
+        case Sulfura:
           break;
-        case NomObjet.PASS_COULISSE_METALLICA:
-          objet = this.qualitePassCoulisseMetallica(objet);
+        case Conjure:
+          Conjure.update(objet);
           break;
-        case NomObjet.VIEUX_BRIE:
-          objet.qualite++;
+        case PassCoulisseMetallica:
+          PassCoulisseMetallica.update(objet);
           break;
-        case NomObjet.GATEAU_MANA_CONJURE:
-          objet.joursRestantsAvantPeremption--;
-          objet.qualite = objet.joursRestantsAvantPeremption <= 0 ? objet.qualite - 4 : objet.qualite - 2;
+        case VieuxBrie:
+          VieuxBrie.update(objet);
+          break;
+        case ObjetRoseDoree:
+          ObjetRoseDoree.update(objet);
           break;
         default:
-          objet.joursRestantsAvantPeremption--;
-          if (objet.joursRestantsAvantPeremption <= 0) {
-            objet.qualite = objet.qualite - 2;
-          } else {
-            objet.qualite--;
-          }
-          if (objet.qualite < 0) {
-            objet.qualite = 0;
-          }
-
-          break;
+          throw new Error("CREER UNE CLASSE QUI ETEND OBJET")
       }
       objet = this.verificationQualiteMax(objet);
     });
