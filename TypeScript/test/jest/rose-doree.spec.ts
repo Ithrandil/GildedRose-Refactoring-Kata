@@ -31,3 +31,9 @@ describe("Rose Doree", () => {
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(50);
   });
+
+  it("Devrait ne pas faire perdre de 'qualité' à 'Sulfuras, Main de Ragnaros'", () => {
+    const roseDoree = new RoseDoree([new Objet("Sulfuras, Main de Ragnaros", 30, 20)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].qualite).toBe(20);
+  });
