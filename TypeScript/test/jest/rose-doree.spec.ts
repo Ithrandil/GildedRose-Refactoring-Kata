@@ -19,3 +19,9 @@ describe("Rose Doree", () => {
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(18);
   });
+
+  it("Devrait ne pas diminuer la 'qualité' en dessous de 0", () => {
+    const roseDoree = new RoseDoree([new Objet("Bière", 20, 0)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].qualite).toBe(0);
+  });
