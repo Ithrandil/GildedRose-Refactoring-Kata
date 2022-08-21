@@ -7,4 +7,10 @@ describe("Rose Doree", () => {
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(19);
   });
+
+  it("Devrait diminuer le nombre de 'jour restant avant peremption' chaque jour", () => {
+    const roseDoree = new RoseDoree([new Objet("Bière", 20, 20)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].joursRestantsAvantPeremption).toBe(19);
+  });
 });
