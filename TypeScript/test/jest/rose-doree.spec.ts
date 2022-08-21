@@ -39,9 +39,15 @@ describe("Rose Doree", () => {
   });
 
   it("Devrait ne pas faire perdre de 'qualité' à 'Sulfuras, Main de Ragnaros'", () => {
-    const roseDoree = new RoseDoree([new Objet(NomObjet.SULFURAS, 30, 20)]);
+    const roseDoree = new RoseDoree([new Objet(NomObjet.SULFURAS, 30, 80)]);
     const objets = roseDoree.miseAJourqualite();
-    expect(objets[0].qualite).toBe(20);
+    expect(objets[0].qualite).toBe(80);
+  });
+
+  it("Devrait toujours avoir une 'qualité' de 80 pour 'Sulfuras, Main de Ragnaros'", () => {
+    const roseDoree = new RoseDoree([new Objet(NomObjet.SULFURAS, 30, 70)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].qualite).toBe(80);
   });
 
   it("Devrait augmenter la 'qualité' de 'Pass pour les coulisses d'un concert de Metallica' chaque jour", () => {

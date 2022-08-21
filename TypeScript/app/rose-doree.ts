@@ -26,6 +26,10 @@ export class RoseDoree {
 
   miseAJourqualite() {
     this.objets.forEach(objet => {
+      if (objet.nom === NomObjet.SULFURAS) {
+        objet.qualite = 80;
+        return;
+      }
       if (objet.nom != NomObjet.VIEUX_BRIE && objet.nom != NomObjet.PASS_COULISSE_METALLICA) {
         if (objet.qualite > 0) {
           if (objet.nom != NomObjet.SULFURAS) {
