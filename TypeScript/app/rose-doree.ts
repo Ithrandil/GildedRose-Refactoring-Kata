@@ -13,13 +13,6 @@ export class RoseDoree {
     this.objets = objets;
   }
 
-  verificationQualiteMax(objet: Objet) {
-    if (objet.qualite > 50 && !(objet instanceof Sulfura)) {
-      objet.qualite = 50;
-    }
-    return objet;
-  }
-
   miseAJourqualite() {
     this.objets.forEach(objet => {
       switch (objet.constructor) {
@@ -40,7 +33,6 @@ export class RoseDoree {
         default:
           throw new Error("CREER UNE CLASSE QUI ETEND OBJET")
       }
-      objet = this.verificationQualiteMax(objet);
     });
 
     return this.objets;
