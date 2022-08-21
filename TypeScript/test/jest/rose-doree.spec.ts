@@ -26,6 +26,12 @@ describe("Rose Doree", () => {
     expect(objets[0].qualite).toBe(0);
   });
 
+  it("Devrait augmenter la 'qualité' du 'Vieux Brie' chaque jour", () => {
+    const roseDoree = new RoseDoree([new Objet("Vieux Brie", 30, 20)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].qualite).toBe(21);
+  });
+
   it("Devrait ne pas dépasser 50 en 'qualité'", () => {
     const roseDoree = new RoseDoree([new Objet("Pass pour les coulisses d'un concert de Metallica", 30, 50)]);
     const objets = roseDoree.miseAJourqualite();
