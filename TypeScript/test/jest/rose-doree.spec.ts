@@ -37,3 +37,9 @@ describe("Rose Doree", () => {
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(20);
   });
+
+  it("Devrait augmenter la 'qualité' de 'Pass pour les coulisses d'un concert de Metallica' chaque jour", () => {
+    const roseDoree = new RoseDoree([new Objet("Pass pour les coulisses d'un concert de Metallica", 30, 20)]);
+    const objets = roseDoree.miseAJourqualite();
+    expect(objets[0].qualite).toBe(21);
+  });
