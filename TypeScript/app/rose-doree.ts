@@ -17,6 +17,12 @@ export class Objet {
   }
 }
 
+export class Sulfura extends Objet {
+  constructor(nom, joursRestantsAvantPeremption, qualite) {
+    super(nom, joursRestantsAvantPeremption, qualite);
+    this.qualite = 80;
+  }
+}
 export class RoseDoree {
   objets: Array<Objet>;
 
@@ -27,7 +33,6 @@ export class RoseDoree {
   miseAJourqualite() {
     this.objets.forEach(objet => {
       if (objet.nom === NomObjet.SULFURAS) {
-        objet.qualite = 80;
         return;
       }
       if (objet.nom != NomObjet.VIEUX_BRIE && objet.nom != NomObjet.PASS_COULISSE_METALLICA) {

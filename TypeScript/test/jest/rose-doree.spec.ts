@@ -1,4 +1,4 @@
-import { NomObjet, Objet, RoseDoree } from '@/rose-doree';
+import { NomObjet, Objet, RoseDoree, Sulfura } from '@/rose-doree';
 
 describe("Rose Doree", () => {
   // Tests sur les fonctionnalités existantes
@@ -39,13 +39,13 @@ describe("Rose Doree", () => {
   });
 
   it("Devrait ne pas faire perdre de 'qualité' à 'Sulfuras, Main de Ragnaros'", () => {
-    const roseDoree = new RoseDoree([new Objet(NomObjet.SULFURAS, 30, 80)]);
+    const roseDoree = new RoseDoree([new Sulfura(NomObjet.SULFURAS, 30, 11)]);
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(80);
   });
 
   it("Devrait toujours avoir une 'qualité' de 80 pour 'Sulfuras, Main de Ragnaros'", () => {
-    const roseDoree = new RoseDoree([new Objet(NomObjet.SULFURAS, 30, 70)]);
+    const roseDoree = new RoseDoree([new Sulfura(NomObjet.SULFURAS, 30, 11)]);
     const objets = roseDoree.miseAJourqualite();
     expect(objets[0].qualite).toBe(80);
   });
